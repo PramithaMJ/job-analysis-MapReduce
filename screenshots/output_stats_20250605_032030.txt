@@ -1,0 +1,22 @@
+Total skills found:     1093
+Top 20 skills:
+r	1615940
+and	1596548
+communication	944398
+management	830578
+skills	541182
+analysis	534331
+design	520023
+(e.g.	512423
+data	426799
+go	316540
+planning	315617
+knowledge	268387
+development	239513
+tools	226347
+research	221912
+problem-solving	215061
+attention	198342
+software	197693
+marketing	195457
+detail	194834
