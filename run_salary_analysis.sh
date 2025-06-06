@@ -1,99 +1,90 @@
 #!/bin/bash
 # -------------------------------------------------------
-# Salary Analysis - End-to-End Workflow Script
+# Salary Analysis - Truly Local Run Script 
 # University of Ruhuna - EC7205 Cloud Computing
 # Date: June 6, 2025
 # -------------------------------------------------------
 
 echo "============================================================="
-echo "       RUNNING COMPLETE SALARY ANALYSIS WORKFLOW             "
+echo "   RUNNING SALARY ANALYZER MAPREDUCE JOB (TRULY LOCAL MODE)  "
 echo "============================================================="
 echo "Date: $(date)"
 echo
 
-# Define output directories
-OUTPUT_DIR="output/salary_analysis_$(date +%Y%m%d_%H%M%S)"
-SCREENSHOTS_DIR="screenshots/salary_analysis_$(date +%Y%m%d_%H%M%S)"
-
-# Create screenshots directory if it doesn't exist
-mkdir -p "$SCREENSHOTS_DIR"
-
-echo "Step 1: Building the MapReduce job..."
-./build_salary.sh 2>&1 | tee "$SCREENSHOTS_DIR/build_log.txt"
-
-if [ ${PIPESTATUS[0]} -ne 0 ]; then
-    echo "Error: Build failed. Check the build log for details."
+# Check for correct number of arguments
+if [ $# -ne 2 ]; then
+    echo "Usage: ./run_salary_analysis.sh <input_path> <output_path>"
+    echo "Example: ./run_salary_analysis.sh input/job_descriptions.csv output/salary_analysis"
     exit 1
 fi
 
-echo
-echo "Step 2: Running the MapReduce job in local mode..."
+# Set paths
+INPUT_PATH=$1
+OUTPUT_PATH=$2
 
-if [ -n "$1" ]; then
-    INPUT_FILE="$1"
-    echo "Using provided input file: $INPUT_FILE"
+# Set Java and Hadoop environment
+export JAVA_HOME=/opt/homebrew/Cellar/openjdk@11/11.0.27/libexec/openjdk.jdk/Contents/Home
+export HADOOP_HOME=/Users/pramithajayasooriya/Desktop/Hadoop/hadoop
+export HADOOP_CLASSPATH=./salary-analyzer.jar:$HADOOP_HOME/share/hadoop/common/*:$HADOOP_HOME/share/hadoop/common/lib/*:$HADOOP_HOME/share/hadoop/hdfs/*:$HADOOP_HOME/share/hadoop/hdfs/lib/*:$HADOOP_HOME/share/hadoop/mapreduce/*:$HADOOP_HOME/share/hadoop/mapreduce/lib/*:$HADOOP_HOME/share/hadoop/yarn/*:$HADOOP_HOME/share/hadoop/yarn/lib/*
+
+# Set local mode configuration
+export HADOOP_CONF_DIR=./conf
+mkdir -p $HADOOP_CONF_DIR
+cat > $HADOOP_CONF_DIR/core-site.xml << EOF
+<?xml version="1.0"?>
+<configuration>
+  <property>
+    <name>fs.defaultFS</name>
+    <value>file:///</value>
+  </property>
+</configuration>
+EOF
+
+cat > $HADOOP_CONF_DIR/mapred-site.xml << EOF
+<?xml version="1.0"?>
+<configuration>
+  <property>
+    <name>mapreduce.framework.name</name>
+    <value>local</value>
+  </property>
+</configuration>
+EOF
+
+# Remove output directory if it exists
+echo "Removing existing output directory if it exists..."
+rm -rf $OUTPUT_PATH
+
+# Run the MapReduce job in local mode
+echo "Running Salary Analyzer job on full dataset..."
+$HADOOP_HOME/bin/hadoop --config $HADOOP_CONF_DIR jar salary-analyzer.jar SalaryAnalyzer $INPUT_PATH $OUTPUT_PATH
+
+# Check if job completed successfully
+if [ $? -eq 0 ]; then
+    echo "Job completed successfully!"
+    echo "Results are available at: $OUTPUT_PATH"
+    echo
+    echo "Sample results (first 10 entries):"
+    if [ -f "$OUTPUT_PATH/part-r-00000" ]; then
+        head -10 $OUTPUT_PATH/part-r-00000
+        
+        # Count total number of unique job titles analyzed
+        TOTAL_JOBS=$(wc -l < $OUTPUT_PATH/part-r-00000)
+        echo
+        echo "Total unique job titles analyzed: $TOTAL_JOBS"
+        
+        # Find job titles with highest and lowest average salaries
+        echo
+        echo "Top 5 highest paying job titles:"
+        sort -t$'\t' -k2 -nr $OUTPUT_PATH/part-r-00000 | head -5
+        
+        echo
+        echo "5 lowest paying job titles:"
+        sort -t$'\t' -k2 -n $OUTPUT_PATH/part-r-00000 | head -5
+    else
+        echo "No results found in the expected output path. Check job execution logs."
+    fi
 else
-    # Use default input file
-    INPUT_FILE="input/job_descriptions.csv"
-    echo "Using default input file: $INPUT_FILE"
+    echo "Job failed! Check error messages above."
 fi
 
-# First create a small test sample for verification
-TEST_OUTPUT_DIR="${OUTPUT_DIR}_test"
-echo "Running test job with sample data..."
-head -50 "$INPUT_FILE" > "input/sample_data.csv"
-./run_truly_local.sh "input/sample_data.csv" "$TEST_OUTPUT_DIR" 2>&1 | tee "$SCREENSHOTS_DIR/test_job_log.txt"
-
-if [ ${PIPESTATUS[0]} -ne 0 ]; then
-    echo "Error: Test job failed. Check the log for details."
-    exit 1
-fi
-
-echo
-echo "Test job completed successfully. Running full job..."
-./run_truly_local.sh "$INPUT_FILE" "$OUTPUT_DIR" 2>&1 | tee "$SCREENSHOTS_DIR/job_log.txt"
-
-if [ ${PIPESTATUS[0]} -ne 0 ]; then
-    echo "Error: Full job failed. Check the log for details."
-    exit 1
-fi
-
-echo
-echo "Step 3: Generating salary analysis report..."
-./generate_salary_report.sh "$OUTPUT_DIR" 2>&1 | tee "$SCREENSHOTS_DIR/report_log.txt"
-
-if [ ${PIPESTATUS[0]} -ne 0 ]; then
-    echo "Error: Report generation failed."
-    exit 1
-fi
-
-# Capture system and output information for documentation
-echo
-echo "Step 4: Capturing analysis evidence..."
-
-# Save Hadoop version
-hadoop version > "$SCREENSHOTS_DIR/hadoop_version.txt"
-
-# Save directory structure
-ls -la > "$SCREENSHOTS_DIR/file_list.txt"
-find . -type d | sort > "$SCREENSHOTS_DIR/directory_structure.txt"
-
-# Save sample output
-head -20 "$OUTPUT_DIR/part-r-00000" > "$SCREENSHOTS_DIR/output_sample.txt"
-
-# Generate statistics about the output
-echo "Job Title Count: $(wc -l < "$OUTPUT_DIR/part-r-00000")" > "$SCREENSHOTS_DIR/output_stats.txt"
-echo "Highest Salary: $(sort -t$'\t' -k2.9 -nr "$OUTPUT_DIR/part-r-00000" | head -1)" >> "$SCREENSHOTS_DIR/output_stats.txt"
-echo "Lowest Salary: $(sort -t$'\t' -k2.9 -n "$OUTPUT_DIR/part-r-00000" | head -1)" >> "$SCREENSHOTS_DIR/output_stats.txt"
-
-# Copy the report to screenshots directory for archiving
-cp SALARY_ANALYSIS_REPORT.md "$SCREENSHOTS_DIR/"
-
-echo
-echo "============================================================="
-echo "          SALARY ANALYSIS WORKFLOW COMPLETED                 "
-echo "============================================================="
-echo "Output data: $OUTPUT_DIR"
-echo "Analysis report: SALARY_ANALYSIS_REPORT.md"
-echo "Evidence files: $SCREENSHOTS_DIR"
 echo "============================================================="
