@@ -1,4 +1,4 @@
-# Technical Skills Analysis using MapReduce
+# Hadoop & Spark Job Market Analysis
 
 ## University of Ruhuna - Faculty of Engineering
 ### Assignment 1 - Semester 7 (May 2025)
@@ -7,12 +7,16 @@
 
 ## Team Members
 1. Pramitha Jayasooriya (ENG/2020/3990)
-2. [Team Member 2] (ENG/2020/XXX)
-3. [Team Member 3] (ENG/2020/XXX)
+2. Tharindu Jayawardhana (ENG/2020/XXXX)
+3. Chandula Jayathilake (ENG/2020/XXXX)
 
 ## Project Overview
 
-This project implements a Hadoop MapReduce job to analyze job description data and identify the most in-demand technical skills in the job market. By extracting and counting skills mentioned in job descriptions, the analysis provides valuable insights into current skill requirements across various industries.
+This comprehensive project analyzes job market data using both Hadoop MapReduce and Apache Spark frameworks. The analysis focuses on two key aspects:
+
+1. **Technical Skills Analysis**: Identifies the most in-demand technical skills in the job market by extracting and counting skills mentioned in job descriptions.
+
+2. **Salary Analysis**: Analyzes salary information across different job titles to identify trends, high-paying roles, and salary distributions.
 
 ## Repository Structure
 
@@ -32,6 +36,90 @@ This project implements a Hadoop MapReduce job to analyze job description data a
 - `RESULTS_ANALYSIS.md` - In-depth analysis of results
 - `execution_log.txt` - Log of MapReduce job execution
 - `skills-analyzer.jar` - Compiled MapReduce application
+
+## Quick Start Guide
+
+### Prerequisites
+
+- Java 11 or higher
+- Hadoop 3.x
+- Apache Spark 3.x (optional, simulation mode available)
+
+### Running the Analysis
+
+#### Hadoop MapReduce Analysis
+
+```bash
+# Build the salary analyzer
+./build_salary.sh
+
+# Run the salary analysis
+./run_salary_analysis.sh input/job_descriptions.csv output/full_salary_analysis
+
+# Generate comprehensive report
+./generate_comprehensive_report.sh output/full_salary_analysis
+```
+
+#### Apache Spark Analysis (with Spark installed)
+
+```bash
+# Build the Spark analyzer
+./build_spark.sh
+
+# Run the Spark salary analysis
+./run_spark_analysis.sh salary input/job_descriptions.csv output/spark_salary_analysis
+
+# Generate the Spark report
+./generate_spark_report_simple.sh salary output/spark_salary_analysis
+```
+
+#### Apache Spark Analysis (simulation mode)
+
+```bash
+# Run the Spark simulation
+./run_spark_simulation.sh salary input/job_descriptions.csv output/spark_salary_analysis
+
+# Generate the Spark report
+./generate_spark_report_simple.sh salary output/spark_salary_analysis
+```
+
+### Viewing Reports
+
+The reports are generated in markdown format and can be viewed in any markdown viewer:
+
+- `COMPREHENSIVE_SALARY_REPORT.md`: Hadoop-based salary analysis
+- `SPARK_SALARY_ANALYSIS_REPORT.md`: Spark-based salary analysis
+- `SPARK_SKILLS_ANALYSIS_REPORT.md`: Spark-based skills analysis
+
+## Detailed Documentation
+
+For comprehensive documentation on all scripts and workflows:
+
+- `USAGE_GUIDE.md`: Complete usage instructions for all scripts
+- `PROJECT_SUMMARY.md`: Technical overview and results summary
+- `PROJECT_README.md`: Detailed technical implementation details
+
+## Key Features
+
+- Dual implementation using both Hadoop MapReduce and Apache Spark
+- Comprehensive salary analysis across job titles
+- Technical skills frequency analysis with filtering
+- Detailed report generation
+- Simulation mode for environments without Spark
+- Bash scripts for automation of the entire workflow
+
+## Screenshots and Evidence
+
+The `screenshots/` directory contains evidence of execution, including:
+
+- Terminal outputs
+- Directory structures
+- File listings
+- Sample results
+
+## License
+
+This project is developed for educational purposes as part of the EC7205 Cloud Computing module.
 
 ## Dataset Description
 
