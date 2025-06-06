@@ -1,18 +1,23 @@
 # Technical Skills Analysis - Project Summary
+
 ## EC7205 Cloud Computing - Assignment 1
+
 ### University of Ruhuna, Faculty of Engineering
 
 ## Team Members
+
 - Pramitha Jayasooriya
-- [Team Member 2]
-- [Team Member 3]
+- Tharindu Jayawardhana
+- CHandula Jayathilake
 
 ## Project Overview
+
 This project implements a Hadoop MapReduce solution to analyze job descriptions data and identify the most in-demand technical skills in the current job market. By processing job posting information, we extract, count, and rank technical skills mentioned across job titles, descriptions, and required skills sections.
 
 ## 1. Dataset Selection
 
 ### Dataset Details
+
 - **Name**: Job Descriptions Dataset
 - **Source**: [Source information - e.g., Kaggle, etc.]
 - **Size**: ~1.7GB with over 100,000 records
@@ -23,7 +28,9 @@ This project implements a Hadoop MapReduce solution to analyze job descriptions 
   - Skills (column 19)
 
 ### Dataset Appropriateness
+
 The dataset is well-suited for MapReduce processing because:
+
 - It contains unstructured text that requires extraction and analysis
 - The dataset size is substantial, demonstrating the need for distributed processing
 - The extraction of skills from job descriptions is a real-world data analysis task
@@ -32,13 +39,16 @@ The dataset is well-suited for MapReduce processing because:
 ## 2. MapReduce Implementation
 
 ### Task Description
+
 Our MapReduce job identifies and counts in-demand technical skills by:
+
 1. Parsing CSV job posting records
 2. Extracting skills mentioned in job titles, descriptions, and required skills sections
 3. Counting the frequency of each skill across the entire dataset
 4. Filtering out noise and ranking skills by demand
 
 ### Technical Components
+
 - **Mapper (SkillsMapper.java)**: Extracts skills from job descriptions using both predefined skill lists and contextual extraction
 - **Reducer (SkillsReducer.java)**: Aggregates and filters skill occurrences
 - **Driver (SkillsAnalyzer.java)**: Configures and executes the MapReduce job
@@ -46,6 +56,7 @@ Our MapReduce job identifies and counts in-demand technical skills by:
 ## 3. Environment Setup
 
 ### Local Hadoop Environment
+
 - **Hadoop Version**: 3.4.1
 - **Java Version**: JDK 11
 - **OS**: macOS
@@ -54,12 +65,14 @@ Our MapReduce job identifies and counts in-demand technical skills by:
 ## 4. Execution Results
 
 ### Job Statistics
+
 - **Input Size**: 1.7GB (full dataset) and 1.1MB (sample)
 - **Records Processed**: 100,000+ (full dataset) and 1,000 (sample)
 - **Execution Time**: < 1 second for 1,000 records
 - **Memory Usage**: 534MB total heap
 
 ### Top 10 Most Demanded Skills
+
 1. **Communication** - 555 occurrences (55.5% of sample)
 2. **Management** - 533 occurrences (53.3% of sample)
 3. **Analysis** - 331 occurrences (33.1% of sample)
@@ -84,6 +97,7 @@ Performance-wise, our MapReduce implementation processed the job posting dataset
 ## 6. Future Expansion
 
 The model could be expanded in several ways:
+
 - Implement trend analysis by incorporating job posting dates to track skill demand over time
 - Add geographical analysis to identify regional skill demand variations
 - Develop skill clustering to identify related skill sets commonly requested together
@@ -95,16 +109,19 @@ The model could be expanded in several ways:
 ### MapReduce Components
 
 #### SkillsMapper.java
+
 - **Function**: Extracts skills from job descriptions, titles, and skill fields
 - **Features**: CSV parsing with embedded comma handling, case-insensitive matching
 - **Output**: (skill_name, 1) pairs
 
-#### SkillsReducer.java  
+#### SkillsReducer.java
+
 - **Function**: Aggregates skill counts and filters noise
 - **Features**: Minimum threshold filtering (10+ occurrences)
 - **Output**: (skill_name, total_count) pairs
 
 #### SkillsAnalyzer.java
+
 - **Function**: Configures and executes MapReduce job
 - **Features**: Memory optimization, combiner usage
 - **Configuration**: 2GB mapper/reducer memory
@@ -112,20 +129,24 @@ The model could be expanded in several ways:
 ## Project Files
 
 ### Source Code
+
 - **SkillsMapper.java**: Implements the map function to extract skills from job descriptions
 - **SkillsReducer.java**: Implements the reduce function to aggregate skill counts
 - **SkillsAnalyzer.java**: Driver class that configures and runs the MapReduce job
 
 ### Scripts
+
 - **run_local.sh**: Script to run the MapReduce job locally
 - **generate_report.sh**: Script to generate a formatted report of top skills
 
 ### Documentation
+
 - **PROJECT_README.md**: Complete setup and running instructions
 - **RESULTS_ANALYSIS.md**: Detailed analysis of the results
 - **execution_log.txt**: Log of job execution with performance metrics
 
 ### Evidence
+
 - **Screenshots**: Located in the screenshots/ directory
 - **Output samples**: Located in the output/ directory
 - **Input data sample**: Sample of job_descriptions.csv in input/ directory
@@ -133,6 +154,7 @@ The model could be expanded in several ways:
 ## Execution Environment
 
 ### Hadoop Setup
+
 ```bash
 Hadoop 3.4.1
 JAVA_HOME: /Library/Java/JavaVirtualMachines/jdk-11.0.16.jdk/Contents/Home
@@ -140,6 +162,7 @@ HADOOP_HOME: /Users/pramithajayasooriya/Desktop/Hadoop/hadoop
 ```
 
 ### Execution Log Summary
+
 ```
 Job job_local160832138_0001 completed successfully
 Map input records=1000
@@ -151,41 +174,49 @@ Processing time: <1 second
 ## Business Insights
 
 ### Market Trends Discovered
+
 1. **Soft Skills Dominance**: Communication and management skills are most valued
-2. **Data Revolution**: Data analysis skills appear in 25% of all job postings  
+2. **Data Revolution**: Data analysis skills appear in 25% of all job postings
 3. **Security Imperative**: Security awareness required across all roles
 4. **Technical Balance**: Software development skills balanced with analytical skills
 
 ## Running Instructions
 
 ### Prerequisites
+
 - Java 8 or higher
 - Hadoop 3.4.1 installed
 - Dataset file placed in input directory
 
 ### Steps to Run
+
 1. Compile the source code:
+
 ```bash
 mkdir -p classes
 javac -cp $HADOOP_HOME/share/hadoop/common/*:$HADOOP_HOME/share/hadoop/common/lib/*:$HADOOP_HOME/share/hadoop/mapreduce/*:$HADOOP_HOME/share/hadoop/mapreduce/lib/* -d classes src/*.java
 ```
 
 2. Create the JAR file:
+
 ```bash
 jar -cvf skills-analyzer.jar -C classes .
 ```
 
 3. Run the MapReduce job:
+
 ```bash
 ./run_local.sh
 ```
 
 4. Generate the report:
+
 ```bash
 ./generate_report.sh
 ```
 
 ### Repository Structure
+
 ```
 hadoop_project/
 ├── src/                    # Source code files
@@ -207,7 +238,8 @@ This MapReduce project successfully analyzes job descriptions to identify in-dem
 The implementation demonstrates effective use of the MapReduce paradigm for large-scale text analysis, with optimized performance for handling complex CSV data. The results provide actionable insights for job seekers, employers, and educational institutions about current job market trends.
 
 Future work could extend this analysis to include temporal trends, geographical variations, and skill clustering to provide even deeper insights into evolving job market requirements.
-- Executable JAR file  
+
+- Executable JAR file
 - Sample datasets and results
 - Comprehensive analysis reports
 - Setup and execution instructions
