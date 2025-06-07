@@ -43,30 +43,37 @@ To run the hadoop cluster on aws with one master node and 3 data nodes, the terr
 
 
 ![alt text](screenshots_and_logs/aws.png)
+
 EC2s provisionsed in AWS
 
 
 ![alt text](<screenshots_and_logs/master install.png>)
+
 Installing Hadoop on master
 
 
 ![alt text](screenshots_and_logs/workerinstall.png)
+
 Install Hadoop on worker
 
 
 ![alt text](screenshots_and_logs/mastersetup.png)
+
 Configure Hadoop on master node
 
 
 ![alt text](screenshots_and_logs/workersetup.png)
+
 Configure Hadoop on worker node
 
 
 ![alt text](screenshots_and_logs/master.png)
+
 Hadoop running on the master node
 
 
 ![alt text](screenshots_and_logs/worker.png)
+
 Hadoop running on a worker node
 
 
@@ -249,11 +256,15 @@ The dataset contains over 100,000 records and is approximately 1.7GB in size, st
 
 The results analysis is done in the following files:
 
-[text](COMPREHENSIVE_SALARY_REPORT.md)
-[text](RESULTS_ANALYSIS.md)
-[text](SALARY_ANALYSIS_REPORT.md)
-[text](SPARK_salary_ANALYSIS_REPORT.md)
-[text](SPARK_SKILLS_ANALYSIS_REPORT.md)
+[COMPREHENSIVE_SALARY_REPORT](COMPREHENSIVE_SALARY_REPORT.md)
+
+[RESULTS_ANALYSIS](RESULTS_ANALYSIS.md)
+
+[SALARY_ANALYSIS_REPORT](SALARY_ANALYSIS_REPORT.md)
+
+[SPARK_salary_ANALYSIS_REPORT](SPARK_salary_ANALYSIS_REPORT.md)
+
+[SPARK_SKILLS_ANALYSIS_REPORT](SPARK_SKILLS_ANALYSIS_REPORT.md)
 
 
 *This project was completed as part of the Cloud Computing (EC7205) course at the University of Ruhuna, Faculty of Engineering.*
