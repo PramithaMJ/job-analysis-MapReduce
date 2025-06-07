@@ -39,7 +39,7 @@ gitHub Link : [hadoop-cluster-manager](https://github.com/pramithamj/hadoop-clus
 
 ## AWS cluster setup for hadoop
 
-To run the hadoop cluster on aws with one master node and 3 data nodes, the terraform automation is done to provision and setup the resources in folder [text](aws-cloud-deployment)
+To run the hadoop cluster on aws with one master node and 3 data nodes, the terraform automation is done to provision and setup the resources in folder [aws-cloud-deployment](aws-cloud-deployment)
 
 
 ![alt text](screenshots_and_logs/aws.png)
