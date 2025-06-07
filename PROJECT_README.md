@@ -9,15 +9,17 @@ This project implements a MapReduce job to analyze technical skills demand from 
 - **Source**: Job descriptions dataset (job_descriptions.csv)
 - **Size**: ~1.7GB with over 100,000 records
 - **Format**: CSV with multiple columns including job titles, descriptions, and skills
-- **Columns Used**: 
+- **Columns Used**:
   - Column 14: Job Title
-  - Column 17: Job Description  
+  - Column 17: Job Description
   - Column 19: Skills
 
 ## MapReduce Implementation
 
 ### 1. SkillsMapper.java
+
 The mapper extracts technical skills from job postings by:
+
 - Parsing CSV records while handling commas within quoted fields
 - Combining job title, description, and skills text for comprehensive analysis
 - Matching against a predefined list of 50+ technical skills
@@ -25,19 +27,24 @@ The mapper extracts technical skills from job postings by:
 - Emitting skill names with count of 1
 
 **Key Features:**
+
 - Case-insensitive matching
 - Handles CSV parsing with embedded commas
 - Filters out noise (words with numbers, short words)
 - Comprehensive skill dictionary including programming languages, frameworks, tools, and soft skills
 
 ### 2. SkillsReducer.java
+
 The reducer aggregates skill counts by:
+
 - Summing up occurrences of each skill across all job postings
 - Applying a threshold filter (minimum 10 occurrences) to reduce noise
 - Outputting skills with their total frequency
 
 ### 3. SkillsAnalyzer.java
+
 The driver class configures and runs the MapReduce job with:
+
 - Optimized memory settings for large datasets
 - Proper input/output path configuration
 - Using the reducer as both combiner and reducer for efficiency
@@ -45,11 +52,13 @@ The driver class configures and runs the MapReduce job with:
 ## How to Run
 
 ### Prerequisites
+
 - Java 8 or higher
 - Hadoop 3.4.1 installed
 - Dataset file: job_descriptions.csv
 
 ### Compilation
+
 ```bash
 # Compile Java files
 javac -cp "$HADOOP_HOME/share/hadoop/common/*:$HADOOP_HOME/share/hadoop/common/lib/*:$HADOOP_HOME/share/hadoop/mapreduce/*:$HADOOP_HOME/share/hadoop/mapreduce/lib/*" src/*.java -d classes/
@@ -59,6 +68,7 @@ jar cf skills-analyzer.jar -C classes/ .
 ```
 
 ### Execution
+
 ```bash
 # For distributed mode (requires running Hadoop cluster)
 hadoop jar skills-analyzer.jar SkillsAnalyzer input/job_descriptions.csv output/skills_analysis
@@ -70,8 +80,9 @@ java -cp "skills-analyzer.jar:$HADOOP_HOME/share/hadoop/common/*:$HADOOP_HOME/sh
 ## Results and Analysis
 
 ### Top Technical Skills (Sample of 1000 records)
+
 1. **communication** - 555 occurrences
-2. **management** - 533 occurrences  
+2. **management** - 533 occurrences
 3. **analysis** - 331 occurrences
 4. **design** - 313 occurrences
 5. **data** - 256 occurrences
@@ -82,18 +93,21 @@ java -cp "skills-analyzer.jar:$HADOOP_HOME/share/hadoop/common/*:$HADOOP_HOME/sh
 10. **security** - 121 occurrences
 
 ### Key Insights
+
 - **Communication and Management skills** dominate the job market, appearing in over 50% of analyzed positions
 - **Data analysis and design skills** are highly valued across different roles
 - **Software development skills** show strong demand in the technology sector
 - **Security awareness** is increasingly important across industries
 
 ### Performance Observations
+
 - **Processing Speed**: Local mode processed 1000 records in under 1 second
 - **Scalability**: The implementation uses combiner pattern to reduce network traffic
 - **Memory Efficiency**: Configured with 2GB mapper/reducer memory for large datasets
 - **Accuracy**: CSV parsing handles complex fields with embedded commas and quotes
 
 ## Project Structure
+
 ```
 Hadoop/
 ├── src/                          # Source code
@@ -113,6 +127,7 @@ Hadoop/
 ## Execution Evidence
 
 ### Sample Execution Log
+
 ```
 2025-06-05 02:07:29,050 INFO  [main] mapreduce.Job - Job job_local160832138_0001 completed successfully
 2025-06-05 02:07:29,057 INFO  [main] mapreduce.Job - Counters: 30
@@ -131,61 +146,44 @@ Hadoop/
                 Bytes Written=4236
 ```
 
-### Sample Output (Top Skills by Frequency)
-```
-communication   555
-management      533
-analysis        331
-design          313
-data            256
-planning        180
-development     155
-software        136
-problem-solving 125
-security        121
-```
-
 ## Assignment Compliance
 
-### 1. Dataset Selection ✅
+### 1. Dataset Selection 
+
 - Used publicly available job descriptions dataset (~1.7GB, 100,000+ records)
 - Dataset is sufficiently complex and realistic for analysis
 - Clear documentation of dataset source and structure
 
-### 2. MapReduce Implementation ✅
+### 2. MapReduce Implementation
+
 - Complete implementation with Mapper, Reducer, and Driver classes
 - Unique problem: Technical skills analysis from job postings
 - Proper use of MapReduce paradigm for big data processing
 
-### 3. Hadoop Environment ✅
+### 3. Hadoop Environment
+
 - Hadoop 3.4.1 installed and configured
 - Both local and distributed execution modes supported
 - Evidence of successful installation and execution
 
-### 4. Testing and Execution ✅
+### 4. Testing and Execution
+
 - Successfully tested on sample datasets
 - Execution logs and performance metrics captured
 - Input/output samples documented
 
-### 5. Results Interpretation ✅
+### 5. Results Interpretation
+
 - Clear analysis of discovered patterns and insights
 - Performance observations and accuracy assessment
 - Suggestions for model expansion and improvements
 
-### 6. Documentation ✅
+### 6. Documentation
+
 - Comprehensive README with setup instructions
 - Source code properly commented and structured
 - Dataset and results documentation included
 - Evidence of execution with logs and screenshots
-
-## Future Enhancements
-
-1. **Skill Categorization**: Group skills into categories (programming languages, frameworks, soft skills)
-2. **Trend Analysis**: Analyze skill demand trends over time
-3. **Location-based Analysis**: Correlate skills with geographic regions
-4. **Salary Correlation**: Link skill requirements with compensation data
-5. **Real-time Processing**: Implement streaming analysis for live job postings
-6. **Machine Learning Integration**: Use ML to automatically detect new emerging skills
 
 ## Technical Challenges Solved
 
@@ -206,11 +204,13 @@ This project demonstrates effective use of MapReduce paradigm for big data analy
 **Skills Analysis**: Extract and count the frequency of skills mentioned in job descriptions to identify the most in-demand skills in the job market.
 
 ## Environment Setup
+
 - **Hadoop Version**: 3.4.1
 - **Language**: Java
 - **Platform**: macOS
 
 ## Project Structure
+
 ```
 Hadoop/
 ├── src/
@@ -225,6 +225,7 @@ Hadoop/
 ```
 
 ## How to Run
+
 1. Compile the Java files
 2. Create JAR file
 3. Start Hadoop services
@@ -232,11 +233,9 @@ Hadoop/
 5. View results
 
 ## Results
+
 The analysis reveals insights about:
+
 - Most in-demand technical skills
 - Industry-specific skill requirements
 - Geographic distribution of skill demands
-
-## Author
-Pramitha Jayasooriya
-Assignment: MapReduce Implementation

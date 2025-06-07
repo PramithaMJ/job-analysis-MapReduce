@@ -15,7 +15,6 @@
 This project implements both Hadoop MapReduce and Apache Spark solutions to analyze job descriptions data with two main focus areas:
 
 1. **Technical Skills Analysis**: Identifies the most in-demand technical skills in the current job market by processing job posting information to extract, count, and rank skills mentioned across job titles, descriptions, and required skills sections.
-
 2. **Salary Analysis**: Analyzes salary information across different job titles to identify trends, high-paying roles, and salary distributions across the job market.
 
 ## 1. Dataset Selection
@@ -75,19 +74,6 @@ Our MapReduce job identifies and counts in-demand technical skills by:
 - **Execution Time**: < 1 second for 1,000 records
 - **Memory Usage**: 534MB total heap
 
-### Top 10 Most Demanded Skills
-
-1. **Communication** - 555 occurrences (55.5% of sample)
-2. **Management** - 533 occurrences (53.3% of sample)
-3. **Analysis** - 331 occurrences (33.1% of sample)
-4. **Design** - 313 occurrences (31.3% of sample)
-5. **Data** - 256 occurrences (25.6% of sample)
-6. **Planning** - 180 occurrences (18.0% of sample)
-7. **Development** - 155 occurrences (15.5% of sample)
-8. **Software** - 136 occurrences (13.6% of sample)
-9. **Problem-solving** - 125 occurrences (12.5% of sample)
-10. **Security** - 121 occurrences (12.1% of sample)
-
 ## 5. Result Interpretation
 
 The analysis revealed several key insights into the current job market:
@@ -97,16 +83,6 @@ Soft skills like communication and management remain highly valued across all jo
 The high frequency of design, development, and software skills demonstrates the continued growth in technology-focused roles. Security skills appearing in the top 10 reflect growing concerns about cybersecurity across industries.
 
 Performance-wise, our MapReduce implementation processed the job posting dataset efficiently, with good scalability potential for larger datasets. The pattern detection accuracy was high, though some domain-specific terminology may have been missed in specialized fields.
-
-## 6. Future Expansion
-
-The model could be expanded in several ways:
-
-- Implement trend analysis by incorporating job posting dates to track skill demand over time
-- Add geographical analysis to identify regional skill demand variations
-- Develop skill clustering to identify related skill sets commonly requested together
-- Integrate with salary data to correlate skills with compensation levels
-- Improve skill extraction using natural language processing techniques
 
 ## Documentation and Code Structure
 
@@ -175,15 +151,6 @@ Reduce output records=347
 Processing time: <1 second
 ```
 
-## Business Insights
-
-### Market Trends Discovered
-
-1. **Soft Skills Dominance**: Communication and management skills are most valued
-2. **Data Revolution**: Data analysis skills appear in 25% of all job postings
-3. **Security Imperative**: Security awareness required across all roles
-4. **Technical Balance**: Software development skills balanced with analytical skills
-
 ## Running Instructions
 
 ### Prerequisites
@@ -235,22 +202,6 @@ hadoop_project/
 └── execution_log.txt     # Execution evidence
 ```
 
-## Conclusion
-
-This MapReduce project successfully analyzes job descriptions to identify in-demand skills in the current job market. By processing over 100,000 job postings, we've extracted valuable insights about the most sought-after technical and soft skills.
-
-The implementation demonstrates effective use of the MapReduce paradigm for large-scale text analysis, with optimized performance for handling complex CSV data. The results provide actionable insights for job seekers, employers, and educational institutions about current job market trends.
-
-Future work could extend this analysis to include temporal trends, geographical variations, and skill clustering to provide even deeper insights into evolving job market requirements.
-
-- Executable JAR file
-- Sample datasets and results
-- Comprehensive analysis reports
-- Setup and execution instructions
-- Performance benchmarks and evidence
-
-Ready for submission and presentation! 🚀
-
 ## 5. Spark Integration
 
 As an extension to our original MapReduce implementation, we have also implemented the same analyses using Apache Spark to demonstrate the power and flexibility of different big data processing frameworks.
@@ -260,12 +211,13 @@ As an extension to our original MapReduce implementation, we have also implement
 Our Spark implementation includes:
 
 1. **SparkSalaryAnalyzer**: Analyzes salary information across job titles
+
    - Uses RDDs to process job description data
    - Extracts salary ranges using regular expressions
    - Calculates statistics like minimum, maximum, and average salaries
    - Aggregates data by job title
-
 2. **SparkSkillsAnalyzer**: Analyzes technical skills frequency
+
    - Processes unstructured text from job descriptions
    - Extracts technical skills using a predefined dictionary
    - Counts skill occurrences and ranks them by frequency
@@ -285,13 +237,14 @@ The Spark implementation offers several benefits over traditional MapReduce:
 
 Our project provides a unique opportunity to compare both frameworks:
 
-| Aspect | Hadoop MapReduce | Apache Spark |
-|--------|------------------|--------------|
-| Processing Model | Disk-based | In-memory |
-| Performance | Good for very large datasets | Faster for most workloads |
-| Code Complexity | More verbose | More concise |
-| Learning Curve | Steeper | More accessible |
-| Fault Tolerance | Very robust | Good, with lineage-based recovery |
+
+| Aspect           | Hadoop MapReduce             | Apache Spark                      |
+| ---------------- | ---------------------------- | --------------------------------- |
+| Processing Model | Disk-based                   | In-memory                         |
+| Performance      | Good for very large datasets | Faster for most workloads         |
+| Code Complexity  | More verbose                 | More concise                      |
+| Learning Curve   | Steeper                      | More accessible                   |
+| Fault Tolerance  | Very robust                  | Good, with lineage-based recovery |
 
 ### Integration Results
 
@@ -307,10 +260,11 @@ The integration of Spark has expanded the project's capabilities:
 The project includes comprehensive report generation capabilities:
 
 1. **MapReduce Reports**:
+
    - `COMPREHENSIVE_SALARY_REPORT.md`: Detailed salary analysis
    - `RESULTS_ANALYSIS.md`: Skills frequency analysis
-
 2. **Spark Reports**:
+
    - `SPARK_SALARY_ANALYSIS_REPORT.md`: Spark-based salary analysis
    - `SPARK_SKILLS_ANALYSIS_REPORT.md`: Spark-based skills analysis
 

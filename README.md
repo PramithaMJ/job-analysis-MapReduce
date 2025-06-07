@@ -1,41 +1,83 @@
 # Hadoop & Spark Job Market Analysis
 
 ## University of Ruhuna - Faculty of Engineering
+
 ### Assignment 1 - Semester 7 (May 2025)
+
 ### Module: Cloud Computing (EC7205)
-### Deadline: June 7, 2025
 
 ## Team Members
-1. Pramitha Jayasooriya (ENG/2020/3990)
-2. Tharindu Jayawardhana (ENG/2020/XXXX)
-3. Chandula Jayathilake (ENG/2020/XXXX)
+
+1. Jayasooriya L.P.M (EG/2020/3990)
+2. Jayathilake H.A.C.P (EG/2020/3994)
+3. Jayawardhana M.V.T.I (EG/2020/3996)
+
+## 🔗 Project Links
+
+- Website: [Hadoop Cluster Manager](https://pramithamj.github.io/hadoop-cluster-manager/)
+- GitHub Repository: [Hadoop Cluster Manager GitHub](https://github.com/pramithamj/hadoop-cluster-manager)
+- Kaggle Dataset: [Job Description Dataset](https://www.kaggle.com/datasets/ravindrasinghrana/job-description-dataset/data)
 
 ## Project Overview
 
 This comprehensive project analyzes job market data using both Hadoop MapReduce and Apache Spark frameworks. The analysis focuses on two key aspects:
 
 1. **Technical Skills Analysis**: Identifies the most in-demand technical skills in the job market by extracting and counting skills mentioned in job descriptions.
-
 2. **Salary Analysis**: Analyzes salary information across different job titles to identify trends, high-paying roles, and salary distributions.
+
+## Apache Hadoop Cluster Installation Guide
+
+To simplify running Hadoop clusters, we developed a custom web-based tool: **Hadoop Cluster Manager**.
+
+- Easily install Hadoop
+- Manage clusters via a user-friendly interface
+- Automates common admin operations
+
+For full instructions and live demo: [Website Link](https://pramithamj.github.io/hadoop-cluster-manager/)
+
+gitHub Link : [hadoop-cluster-manager](https://github.com/pramithamj/hadoop-cluster-manager)
 
 ## Repository Structure
 
 - `src/` - Java source code for MapReduce implementation
+
   - `SkillsAnalyzer.java` - Driver class for the MapReduce job
   - `SkillsMapper.java` - Mapper implementation for extracting skills
   - `SkillsReducer.java` - Reducer implementation for aggregating skill counts
 - `input/` - Input data directory
+
   - `job_descriptions.csv` - Dataset with job postings
+- `conf/` - configuration of hadoop
+- `python_version/` - python version of the hadoop mapreducer
+- `screenshots_and_log` - sceenshot and log of the analysis
 - `output/` - Generated output from MapReduce job
+- `build_salary.md` - Builds the salary analysis MapReduce job
+- `build_spark.sh` - Builds the Spark analysis jobs
 - `build.sh` - Script to compile code and build JAR
 - `run_local.sh` - Script to run the job in local mode
+- `generate_comprehensive_report.sh` - Script to generate conmprehensive report
 - `generate_report.sh` - Script to generate a summary report of results
+- `generate_salary_report.sh` - Generates a basic report for the salary analysis
+- `generate_spark_report_simple.sh` - Generates reports for Spark-based analysis
+- `generate_spark_report.sh` - Generates reports for Spark-based analysis
 - `capture_evidence.sh` - Script to capture evidence of execution
 - `PROJECT_README.md` - Detailed technical documentation
 - `PROJECT_SUMMARY.md` - Summary of project and findings
+- `COMPREHENSIVE_SALARY_REPORT.md` - Detailed salary analysis from MapReduce
+- `RESULTS_ANALYSIS.md` - Analysis of the skills frequency results
+- `PROJECT_STRUCTURE.md` - Details Stucture of the project
 - `RESULTS_ANALYSIS.md` - In-depth analysis of results
+- `SPARK_salary_ANALYSIS_REPORT.md` - Spark implementation of the salary analysis
+- `SPARK_SKILLS_ANALYSIS_REPORT.md` - Spark implementation of the skill analysis
+- `USAGE_GUIDE.md` - Comprehensive usage instructions for all scripts
 - `execution_log.txt` - Log of MapReduce job execution
 - `skills-analyzer.jar` - Compiled MapReduce application
+- `SALARY_ANALYSIS_REPORT.md` - Basic salary statistics report
+- `run_local.sh` - Runs the skills analysis in local mode
+- `run_salary_analysis.sh` - Comprehensive script for running the salary analysis with detailed output
+- `run_salary.sh` - Comprehensive script for running the salary analysis with detailed output
+- `run_spark_analysis.sh` - Runs either salary or skills analysis in Spark
+- `run_spark_simulation.sh` - Generates reports for Spark-based analysis
 
 ## Quick Start Guide
 
@@ -132,6 +174,7 @@ We used a job descriptions dataset containing detailed information about job pos
 - Job locations and other metadata
 
 The dataset contains over 100,000 records and is approximately 1.7GB in size, stored in CSV format. Key columns used in our analysis include:
+
 - Column 14: Job Title
 - Column 17: Job Description
 - Column 19: Skills
@@ -139,6 +182,7 @@ The dataset contains over 100,000 records and is approximately 1.7GB in size, st
 ## How to Run
 
 ### Prerequisites
+
 - Java JDK 11 or higher
 - Hadoop 3.4.1 installed and configured
 - CSV dataset in the input directory
@@ -146,21 +190,22 @@ The dataset contains over 100,000 records and is approximately 1.7GB in size, st
 ### Steps
 
 1. **Build the project**
+
    ```bash
    ./build.sh
    ```
-
 2. **Run in local mode**
+
    ```bash
    ./run_local.sh
    ```
-
 3. **Generate a report**
+
    ```bash
    ./generate_report.sh
    ```
-
 4. **Capture execution evidence**
+
    ```bash
    ./capture_evidence.sh
    ```
@@ -170,7 +215,7 @@ The dataset contains over 100,000 records and is approximately 1.7GB in size, st
 Our MapReduce analysis revealed the following top skills in the job market:
 
 1. Communication (5931 occurrences)
-2. Management (5198 occurrences) 
+2. Management (5198 occurrences)
 3. Design (3371 occurrences)
 4. Analysis (3283 occurrences)
 5. Data (2548 occurrences)
@@ -186,19 +231,6 @@ The complete analysis can be found in `RESULTS_ANALYSIS.md`.
 - Reduce output records: 1,091
 - Processing time: ~3 seconds (local mode)
 
-## Insights and Conclusions
-
-The analysis reveals the continued importance of both technical and soft skills in the job market, with communication and management skills being the most in-demand. Among technical skills, design, analysis, and data skills are particularly valuable.
-
-Our MapReduce implementation demonstrated efficient processing of semi-structured text data, with effective use of combiners to reduce the data transferred between mappers and reducers.
-
-## Future Improvements
-
-1. Implement more sophisticated NLP techniques for skill extraction
-2. Add industry-specific and geographical analysis
-3. Incorporate salary data to identify high-value skills
-4. Scale to the full dataset using a Hadoop cluster
-5. Create visualizations of skill demand trends
-
 ---
+
 *This project was completed as part of the Cloud Computing (EC7205) course at the University of Ruhuna, Faculty of Engineering.*

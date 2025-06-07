@@ -19,6 +19,15 @@ This guide explains how to use all the scripts in this project to build, run the
 - Apache Spark 3.x installed (for Spark analysis)
 - CSV dataset file in the input directory
 
+### Dataset Information
+
+This project uses the Job Description Dataset from Kaggle:
+- **Source**: [Job Description Dataset on Kaggle](https://www.kaggle.com/datasets/ravindrasinghrana/job-description-dataset/data)
+- **Download**: You will need to download the dataset from Kaggle and place it in the `input/` directory as `job_descriptions.csv`
+- **Size**: ~1.7GB with over 100,000 records
+
+If you need assistance setting up Hadoop, please visit our [Hadoop Cluster Manager](https://github.com/pramithamj/hadoop-cluster-manager) for detailed installation instructions and cluster management tools.
+
 ## Project Overview
 
 This project contains two main analyses available in both Hadoop MapReduce and Apache Spark implementations:
@@ -356,3 +365,38 @@ For an educational comparison of MapReduce and Spark:
 ```
 
 3. Compare the reports to understand differences in approach, performance, and results.
+
+## Hadoop Cluster Manager Integration
+
+Our team has also developed a Hadoop Cluster Manager tool to simplify the deployment and management of Hadoop clusters. This can be particularly useful if you're setting up a new Hadoop environment for running these analyses.
+
+### Accessing the Hadoop Cluster Manager
+
+- **Website**: [https://pramithamj.github.io/hadoop-cluster-manager/](https://pramithamj.github.io/hadoop-cluster-manager/)
+- **GitHub Repository**: [https://github.com/pramithamj/hadoop-cluster-manager](https://github.com/pramithamj/hadoop-cluster-manager)
+
+### Using the Hadoop Cluster Manager
+
+1. **Setting Up a New Cluster**:
+   ```bash
+   # Clone the cluster manager repository
+   git clone https://github.com/pramithamj/hadoop-cluster-manager.git
+   
+   # Navigate to the repository
+   cd hadoop-cluster-manager
+   
+   # Follow the installation instructions in the repository
+   ```
+
+2. **Managing Your Cluster**:
+   - Access the web interface at [https://pramithamj.github.io/hadoop-cluster-manager/](https://pramithamj.github.io/hadoop-cluster-manager/)
+   - Use the dashboard to monitor cluster health
+   - Configure node settings through the interface
+   - Submit jobs directly from the web UI
+
+3. **Optimizing Performance**:
+   - Use the monitoring tools to identify bottlenecks
+   - Apply recommended configuration settings for your specific analyses
+   - Adjust resource allocation based on job requirements
+
+The Hadoop Cluster Manager complements this project by providing an intuitive interface for managing the underlying infrastructure, allowing you to focus on data analysis rather than cluster management.
