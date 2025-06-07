@@ -45,20 +45,26 @@ To run the hadoop cluster on aws with one master node and 3 data nodes, the terr
 ![alt text](screenshots_and_logs/aws.png)
 EC2s provisionsed in AWS
 
+
 ![alt text](<screenshots_and_logs/master install.png>)
 Installing Hadoop on master
+
 
 ![alt text](screenshots_and_logs/workerinstall.png)
 Install Hadoop on worker
 
+
 ![alt text](screenshots_and_logs/mastersetup.png)
 Configure Hadoop on master node
+
 
 ![alt text](screenshots_and_logs/workersetup.png)
 Configure Hadoop on worker node
 
+
 ![alt text](screenshots_and_logs/master.png)
 Hadoop running on the master node
+
 
 ![alt text](screenshots_and_logs/worker.png)
 Hadoop running on a worker node
