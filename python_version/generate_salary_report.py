@@ -19,7 +19,7 @@ def read_hdfs_output(hdfs_path):
         result = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, check=True)
         return result.stdout.strip().split('\n')
     except subprocess.CalledProcessError as e:
-        print(f"❌ Error reading from HDFS: {e.stderr}")
+        print(f"Error reading from HDFS: {e.stderr}")
         return []
 
 # === PARSE DATA ===
@@ -68,7 +68,7 @@ def generate_pdf(data, output_file):
 
     elements.append(table)
     doc.build(elements)
-    print(f"✅ PDF report saved as: {output_file}")
+    print(f"PDF report saved as: {output_file}")
 
 # === MAIN ===
 if __name__ == "__main__":

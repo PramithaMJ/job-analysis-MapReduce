@@ -3,7 +3,6 @@ import sys
 import csv
 import re
 
-# Regex to capture salary ranges like "$50K - $80K" or "50000 - 80000"
 salary_pattern = re.compile(r'\$?(\d+)K?\s*-\s*\$?(\d+)K?')
 
 def parse_salary(salary_str):
@@ -22,7 +21,6 @@ def parse_salary(salary_str):
 
 for line in sys.stdin:
     try:
-        # Use csv.reader to handle quoted fields and commas inside quotes
         reader = csv.reader([line])
         fields = next(reader)
 
@@ -37,9 +35,7 @@ for line in sys.stdin:
         avg_salary = parse_salary(salary_field)
 
         if avg_salary > 0:
-            # Output format: key<TAB>value
-            # value = min,max,avg,count → all set to avg for mapper
             print(f"{job_title}\t{avg_salary},{avg_salary},{avg_salary},1")
 
     except Exception:
-        continue  # skip malformed lines
+        continue  
