@@ -37,6 +37,21 @@ For full instructions and live demo: [Website Link](https://pramithamj.github.io
 
 gitHub Link : [hadoop-cluster-manager](https://github.com/pramithamj/hadoop-cluster-manager)
 
+## AWS cluster setup for hadoop
+
+To run the hadoop cluster on aws with one master node and 3 data nodes, the terraform automation is done to provision and setup the resources in folder aws-cloud-deployment
+
+
+![alt text](screenshots_and_logs/aws.png)
+EC2s provisionsed in AWS
+
+![alt text](screenshots_and_logs/master.png)
+Hadoop running on the master node
+
+![alt text](screenshots_and_logs/worker.png)
+Hadoop running on a worker node
+
+
 ## Repository Structure
 
 - `src/` - Java source code for MapReduce implementation
@@ -232,5 +247,6 @@ The complete analysis can be found in `RESULTS_ANALYSIS.md`.
 - Processing time: ~3 seconds (local mode)
 
 ---
+
 
 *This project was completed as part of the Cloud Computing (EC7205) course at the University of Ruhuna, Faculty of Engineering.*

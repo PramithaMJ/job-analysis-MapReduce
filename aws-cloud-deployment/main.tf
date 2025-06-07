@@ -118,9 +118,9 @@ resource "aws_instance" "hadoop_master" {
     volume_type = "gp2"
   }
 
-  # user_data = templatefile("${path.module}/scripts/master-setup.sh", {
-  #   WORKER_COUNT    = var.worker_count,
-  # })
+  user_data = templatefile("${path.module}/scripts/master-setup.sh", {
+    WORKER_COUNT    = var.worker_count,
+  })
 
   tags = {
     Name = "hadoop-master"
@@ -142,9 +142,9 @@ resource "aws_instance" "hadoop_workers" {
     volume_size = 30
     volume_type = "gp2"
   }
-  # user_data = templatefile("${path.module}/scripts/worker-setup.sh", {
-  #   MASTER_IP      = aws_instance.hadoop_master.private_ip,
-  # })
+  user_data = templatefile("${path.module}/scripts/worker-setup.sh", {
+    MASTER_IP      = aws_instance.hadoop_master.private_ip,
+  })
 
   tags = {
     Name = "hadoop-worker-${count.index + 1}"
