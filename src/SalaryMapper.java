@@ -1,4 +1,3 @@
-// filepath: /Users/pramithajayasooriya/Desktop/Hadoop/hadoop_project/src/SalaryMapper.java
 import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
