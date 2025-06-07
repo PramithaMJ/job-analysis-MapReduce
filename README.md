@@ -39,11 +39,23 @@ gitHub Link : [hadoop-cluster-manager](https://github.com/pramithamj/hadoop-clus
 
 ## AWS cluster setup for hadoop
 
-To run the hadoop cluster on aws with one master node and 3 data nodes, the terraform automation is done to provision and setup the resources in folder aws-cloud-deployment
+To run the hadoop cluster on aws with one master node and 3 data nodes, the terraform automation is done to provision and setup the resources in folder [text](aws-cloud-deployment)
 
 
 ![alt text](screenshots_and_logs/aws.png)
 EC2s provisionsed in AWS
+
+![alt text](<screenshots_and_logs/master install.png>)
+Installing Hadoop on master
+
+![alt text](screenshots_and_logs/workerinstall.png)
+Install Hadoop on worker
+
+![alt text](screenshots_and_logs/mastersetup.png)
+Configure Hadoop on master node
+
+![alt text](screenshots_and_logs/workersetup.png)
+Configure Hadoop on worker node
 
 ![alt text](screenshots_and_logs/master.png)
 Hadoop running on the master node
@@ -225,28 +237,17 @@ The dataset contains over 100,000 records and is approximately 1.7GB in size, st
    ./capture_evidence.sh
    ```
 
-## Key Results
-
-Our MapReduce analysis revealed the following top skills in the job market:
-
-1. Communication (5931 occurrences)
-2. Management (5198 occurrences)
-3. Design (3371 occurrences)
-4. Analysis (3283 occurrences)
-5. Data (2548 occurrences)
-
-The complete analysis can be found in `RESULTS_ANALYSIS.md`.
-
-## Performance Statistics
-
-- Map input records: 10,000
-- Map output records: 181,219
-- Combine input records: 181,219
-- Combine output records: 1,091
-- Reduce output records: 1,091
-- Processing time: ~3 seconds (local mode)
 
 ---
+## Results analysis
+
+The results analysis is done in the following files:
+
+[text](COMPREHENSIVE_SALARY_REPORT.md)
+[text](RESULTS_ANALYSIS.md)
+[text](SALARY_ANALYSIS_REPORT.md)
+[text](SPARK_salary_ANALYSIS_REPORT.md)
+[text](SPARK_SKILLS_ANALYSIS_REPORT.md)
 
 
 *This project was completed as part of the Cloud Computing (EC7205) course at the University of Ruhuna, Faculty of Engineering.*
